@@ -7,7 +7,7 @@ class Runner
 		@name = name
 		@rolodex = Rolodex.new
 	end
-	
+
 	def main_menu
 		puts "1. Add a Contact"
 		puts "2. Modify a Contact"
@@ -56,15 +56,54 @@ class Runner
 	end
 
 	def modify_contact
+		print "Enter contact id to modify"
+		id = gets.chomp.to_i
+
+		done = false
+		while !done
+			puts "What attribute would you like to modify?"
+			puts "1. First Name"
+			puts "2. Last Name"
+			puts "3. Email"
+			puts "4. Notes"
+			puts "0. Back to Menu"
+			attribute_selection = gets.chomp
+			if attribute_selection == 0
+				done = true
+			elsif attribute_selection == 1
+				puts "Enter Updated Info:"
+				first_name = gets.chomp
+				@rolodex.edit_first_name(id, first_name)
+			elsif attribute_selection == 2
+				puts "Enter Updated Info:"
+				last_name = gets.chomp
+				@rolodex.edit_last_name(id, last_name)
+			elsif attribute_selection == 3
+				puts "Enter Updated Info:"
+				email = gets.chomp
+				@rolodex.edit_email(id, email)
+			elsif attribute_selection == 4
+				puts "Enter Updated Info:"
+				notes = gets.chomp
+				@rolodex.edit_notes(id, notes)
+			else 
+				"Error. Please make a valid selection."
+			end		
+		end	
 	end
 
 	def delete_contact
+		print "Enter ID of Contact to Delete:"
+		id = gets.chomp.to_i
+		@rolodex.delete_contact(id)
 	end
 
 	def display_all
+		print contacts 
 	end
 
 	def display_one
 	end			
-
 end
+
+run = Runner.new("Em")
